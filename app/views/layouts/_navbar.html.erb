@@ -1,0 +1,32 @@
+ <head>
+    <%= javascript_include_tag "dropdown" %> 
+ </head>
+<nav>
+    <ul>
+        <li>
+            <%= link_to "Home", events_path, id: "homeBtn", class: "selectBtn" %>
+        </li>
+        <% if current_user %>
+            <li class="dropdown">
+                <button class="dropbtn selectBtn" onclick="toggleShow()">
+                    <%= current_user.username %>
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                    <%= link_to "Edit Account", edit_user_registration_path %>
+                    <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+                </div> 
+            </li>
+        <% else %>
+            <li class="dropdown">
+                <button class="dropbtn selectBtn" onclick="toggleShow()">
+                    Accounts
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                <%= link_to "Sign Up", new_user_registration_path %>
+                <%= link_to "Login", new_user_session_path %>
+                </div>
+                
+            </li>
+        <% end %>
+    </ul>
+</nav>

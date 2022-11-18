@@ -1,17 +1,7 @@
-<div id="<%= dom_id event %>">
-  <p>
-    <strong>Name:</strong>
-    <%= event.name %>
-  </p>
+<div id="<%= dom_id event %>" class="event flexVertCenter">
 
-  <p>
-    <strong>Description:</strong>
-    <%= event.description %>
-  </p>
+  <h2 class="eventName"><%= event.name %></h2>
+  <h4><%= event.date.strftime("%m/%d/%Y at %I:%M%p") %></h4>
 
-  <p>
-    <strong>Date:</strong>
-    <%= event.date %>
-  </p>
 
 </div>
