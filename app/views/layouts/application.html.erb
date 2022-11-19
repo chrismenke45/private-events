@@ -11,7 +11,11 @@
   </head>
 
   <body class="flexVertCenter">
-    <%= render "layouts/navbar" %>
+    <header>
+      <%= render "layouts/navbar" %>
+      <%= render "layouts/alerts" %>
+    </header>
+    
     <%= yield %>
   </body>
 </html>

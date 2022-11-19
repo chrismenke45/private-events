@@ -1,0 +1,1 @@
+If current migrations dont work for has_and_belongs_to_many then rollback last two migrations and remove user/event join table to get back
