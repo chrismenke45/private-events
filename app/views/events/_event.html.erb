@@ -2,6 +2,7 @@
 
   <h2 class="eventName"><%= event.name %></h2>
   <h4><%= event.date.strftime("%m/%d/%Y at %I:%M%p") %></h4>
+  <span><%= pluralize(event.attendees.count, "Attendee") %></span>
 
 
 </div>
