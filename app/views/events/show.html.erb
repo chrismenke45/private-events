@@ -1,6 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @event %>
+<h1 class="eventName"><%= @event.name %></h1>
+  <h4><%= @event.date.strftime("%m/%d/%Y at %I:%M%p") %></h4>
+  <p><%= @event.description %>
+  
+  <details>
+    <summary>
+      <%= pluralize(@event.attendees.count, "Attendee") %>
+    </summary>
+    <% if @event.attendees.count > 0 %>
+      <ul>
+        <% @event.attendees.each do |attendee| %>
+          <li><%= attendee.first_name + " " + attendee.family_name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      Be the first to go!
+    <% end %>
+  </details>
 
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |
