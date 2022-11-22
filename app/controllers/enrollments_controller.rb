@@ -4,26 +4,25 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    @enrollment = enrollment.new
+    @enrollment = Enrollment.new
+    @enrollment.attendee_id = current_user.id
+    @enrollment.attended_event_id = params[:event_id]
 
-    respond_to do |format|
-      if @enrollment.save
-        format.html { redirect_to enrollment_url(@enrollment), notice: "enrollment was successfully created." }
-        format.json { render :show, status: :created, location: @enrollment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-      end
+    if @enrollment.save
+      puts "*****************************"
+      redirect_to controller: :events, action: :show, id: params[:event_id], notice: "You are now attending this event"
+    else
+      puts "#############################"
+      redirect_to controller: :events, action: :show, id: params[:event_id], notice: "Something went wrong"
     end
   end
 
   # DELETE /enrollments/1 or /enrollments/1.json
   def destroy
-    @enrollment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to enrollments_url, notice: "enrollment was successfully destroyed." }
-      format.json { head :no_content }
+    if @enrollment.destroy
+      redirect_to controller: :events, action: :show, id: params[:event_id], notice: "You are no longer attending this event"
+    else
+      flash[:notice] = "Something went wrong"
     end
   end
 
@@ -31,6 +30,6 @@ class EnrollmentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_enrollment
-    @enrollment = enrollment.find(params[:id])
+    @enrollment = Enrollment.find(params[:id])
   end
 end
