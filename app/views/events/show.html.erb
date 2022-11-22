@@ -31,8 +31,9 @@
   </details>
 
 <div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %>
-
-  <%= button_to "Destroy this event", @event, method: :delete %>
+  <% if current_user.id == @event.host_id %>
+    <%= link_to "Edit this event", edit_event_path(@event) %> |
+    <%= button_to "Delete this event", @event, method: :delete %>
+  <% end %>
 </div>
