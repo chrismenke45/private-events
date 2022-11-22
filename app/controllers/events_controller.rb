@@ -1,10 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index]
+  before_action :check_event_host_is_user, only: %i[ edit, update, destroy ]
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.includes(:host).all
   end
 
   # GET /events/1 or /events/1.json
@@ -22,7 +23,8 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
+    @event = current_user.hosted_events.new(event_params)
+    #@event.host_id = current_user.id
 
     respond_to do |format|
       if @event.save
@@ -63,6 +65,10 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def check_event_host_is_user
+    redirect_to events_url, notice: "You can't edit someone else's event" if @event.host_id != current_user.id
   end
 
   # Only allow a list of trusted parameters through.
