@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :events
+  resources :enrollments, only: [:create, :destroy]
   devise_for :users, controllers: {
                        sessions: "users/sessions",
                        registrations: "users/registrations",
