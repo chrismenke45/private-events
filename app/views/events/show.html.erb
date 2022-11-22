@@ -14,9 +14,20 @@
           <li><%= attendee.first_name + " " + attendee.family_name %></li>
         <% end %>
       </ul>
-    <% else %>
-      Be the first to go!
     <% end %>
+    <% if @event.attendee_ids.include?(current_user.id) %>
+    <% user_enrollment = Enrollment.select(:id).where("attendee_id = ? AND attended_event_id = ?", current_user.id, @event.id).take %>
+    <%= form_with url: "/enrollments/#{user_enrollment.id}", method: "delete" do |form| %>
+        <%= form.hidden_field :event_id, value: @event.id %>
+        <%= form.submit "I can't go anymore" %>
+      <% end %>
+    <% else %>
+      <%= form_with url: "/enrollments" do |form| %>
+        <%= form.hidden_field :event_id, value: @event.id %>
+        <%= form.submit "I want to go!" %>
+      <% end %>
+    <% end %>
+    yeeaw
   </details>
 
 <div>
