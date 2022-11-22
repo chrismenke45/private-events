@@ -4,8 +4,9 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    @enrollment = Enrollment.new
-    @enrollment.attendee_id = current_user.id
+    #@enrollment = Enrollment.new
+    @enrollment = current_user.enrollments.new
+    #@enrollment.attendee_id = current_user.id
     @enrollment.attended_event_id = params[:event_id]
 
     if @enrollment.save
