@@ -1,0 +1,11 @@
+<section id=<%= title %> class="eventsContainer flexVertCenter">
+  <h2><%= title.capitalize %> Events:</h2>
+  <div class="eventsList">
+    <% events.each do |event| %>
+      <div class="eventCard flexVertCenter">
+        <%= render :partial => "events/event", :locals => { :event => event } %>
+        <%= link_to "See More", event, class: "selectBtn" %>
+      </div>
+    <% end %>
+  </div>
+</section>
