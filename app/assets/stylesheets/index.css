@@ -117,7 +117,10 @@ h1 {
 details * {
     text-align: center;
 }
-a {
+a, button {
     text-decoration: none;
     color: inherit;
+    background: inherit;
+    border: none;
+    cursor: pointer;
 }
