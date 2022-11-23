@@ -1,15 +1,31 @@
-<p style="color: green"><%= notice %></p>
 
 <h1>Events</h1>
-
-<div id="events" class="flexVertCenter">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "See More", event, class: "selectBtn" %>
-    </p>
-  <% end %>
-</div>
 <% if current_user %>
   <%= link_to "New event", new_event_path, class: "selectBtn" %>
 <% end %>
+
+<%= render :partial => "events/event_list", :locals => { :events => @events.upcoming, :title => "upcoming" } if @events.upcoming.count > 0 %>
+<%= render :partial => "events/event_list", :locals => { :events => @events.past, :title => "past" } if @events.past.count > 0 %>
+<!--<section id="upcoming" class="eventsContainer flexVertCenter">
+  <h2>Upcoming Events:</h2>
+  <div class="eventsList">
+    <% @events.upcoming.each do |event| %>
+      <div class="eventCard flexVertCenter">
+        <%= render event %>
+        <%= link_to "See More", event, class: "selectBtn" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+<section id="past" class="eventsContainer flexVertCenter">
+  <h2>Past Events:</h2>
+  <div class="eventsList">
+    <% @events.past.each do |event| %>
+      <div class="eventCard flexVertCenter">
+        <%= render event %>
+        <%= link_to "See More", event, class: "selectBtn" %>
+      </div>
+    <% end %>
+  </div>
+</section>-->
+

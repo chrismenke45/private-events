@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :date, style: "display: block" %>
     <%= form.datetime_field :date %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="formGroup">
+    <%= form.submit class: "selectBtn" %>
   </div>
 <% end %>

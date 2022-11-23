@@ -48,13 +48,40 @@ h1 {
 .selectBtn:hover {
     background-color: var(--theme-darkened-color);
 }
-.event {
-
+.eventsContainer {
+    width: 100%;
+}
+.eventsContainer > h2 {
+    font-size: 20px;
+} 
+.eventsList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.eventCard {
+    flex: 0 1 200px;
+    /* background-color: var(--theme-darkened-color); */
+    margin: 10px;
+    border-radius: 10px;
+    border: var(--theme-color) 3px solid;
+    padding: 5px 0;
 }
 .eventName {
     text-decoration: underline;
     font-size: 20px;
 }
+#past .eventCard {
+    background: rgba(247, 199, 104, 0.5);
+}
+#upcoming .eventCard {
+    background: rgba(247, 199, 104, 0.8);
+}
+#attended .eventCard {
+    background: rgba(247, 199, 104, 0.25);
+}
+
 #homeBtn span {
     color: var(--theme-color);
 }
@@ -64,4 +91,33 @@ h1 {
     font-weight: bolder;
     font-size: 18px;
     text-transform: uppercase;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.formGroup > input, textarea {
+    border: 3px solid var(--theme-color);
+    padding: 3px;
+    border-radius: 6px;
+    width: 100%;
+}
+.buttonBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttonBox div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+details * {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }

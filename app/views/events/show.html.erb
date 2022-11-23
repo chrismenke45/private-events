@@ -4,14 +4,15 @@
   <h4><%= @event.date.strftime("%m/%d/%Y at %I:%M%p") %></h4>
   <p><%= @event.description %>
   
-  <details>
+  <details class="flexVertCenter">
     <summary>
       <%= pluralize(@event.attendees.count, "Attendee") %>
     </summary>
     <% if @event.attendees.count > 0 %>
-      <ul>
+      <ul class="flexVertCenter">
         <% @event.attendees.each do |attendee| %>
-          <li><%= attendee.first_name + " " + attendee.family_name %></li>
+          <li><%= link_to attendee.first_name + " " + attendee.family_name, "/users/#{attendee.id}" %>
+          <!--<%= attendee.first_name + " " + attendee.family_name %>--></li>
         <% end %>
       </ul>
     <% end %>
@@ -19,21 +20,22 @@
     <% user_enrollment = Enrollment.select(:id).where("attendee_id = ? AND attended_event_id = ?", current_user.id, @event.id).take %>
     <%= form_with url: "/enrollments/#{user_enrollment.id}", method: "delete" do |form| %>
         <%= form.hidden_field :event_id, value: @event.id %>
-        <%= form.submit "I can't go anymore" %>
+        <%= form.submit "I can't go anymore", class: "selectBtn" %>
       <% end %>
     <% else %>
       <%= form_with url: "/enrollments" do |form| %>
         <%= form.hidden_field :event_id, value: @event.id %>
-        <%= form.submit "I want to go!" %>
+        <%= form.submit "I want to go!", class: "selectBtn" %>
       <% end %>
     <% end %>
-    yeeaw
   </details>
 
-<div>
-  <%= link_to "Back to events", events_path %>
+<div class="buttonBox">
+  <%= link_to "Back to events", events_path, class: "selectBtn" %>
   <% if current_user.id == @event.host_id %>
-    <%= link_to "Edit this event", edit_event_path(@event) %> |
-    <%= button_to "Delete this event", @event, method: :delete %>
+    <div>
+      <%= link_to "Edit this event", edit_event_path(@event), class: "selectBtn" %> |
+      <%= button_to "Delete this event", @event, method: :delete, class: "selectBtn" %>
+    <div>
   <% end %>
 </div>

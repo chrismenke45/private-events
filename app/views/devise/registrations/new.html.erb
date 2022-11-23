@@ -41,34 +41,36 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :email, style: "display: block" %>
     <%= form.email_field :email %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :family_name, style: "display: block" %>
     <%= form.text_field :family_name %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :password, style: "display: block" %>
     <%= form.password_field :password %>
   </div>
 
-  <div>
+  <div class="formGroup">
     <%= form.label :password_confirmation, style: "display: block" %>
     <%= form.password_field :password_confirmation %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="formGroup">
+    <%= form.submit class: "selectBtn" %>
   </div>
 <% end %>
+<p>or</p>
+<%= link_to "Log in", new_session_path(resource_name), class: "selectBtn" %>
 
-<%= render "devise/shared/links" %>
+<!--<%= render "devise/shared/links" %>-->
