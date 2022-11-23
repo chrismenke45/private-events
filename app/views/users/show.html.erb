@@ -1,0 +1,18 @@
+<h1><%= @user.first_name + " " + @user.family_name %></h1>
+<%= render :partial => "events/event_list", :locals => { :events => @user.hosted_events.upcoming, :title => "upcoming" } if @user.hosted_events.upcoming.count > 0 %>
+<%= render :partial => "events/event_list", :locals => { :events => @user.hosted_events.past, :title => "past" } if @user.hosted_events.past.count > 0 %>
+<%= render :partial => "events/event_list", :locals => { :events => @user.attended_events, :title => "attended" } if @user.attended_events.count > 0 %>
+<p>
+<!--<% @user.hosted_events.each do |event| %>
+    <%= render :partial => "events/event", :locals => { :event => event } %>
+    <p>
+      <%= link_to "See More", event, class: "selectBtn" %>
+    </p>
+<% end %>
+<h2><%= @user.first_name %>'s attending:</h2>
+<% @user.attended_events.each do |event| %>
+    <%= render :partial => "events/event", :locals => { :event => event } %>
+    <p>
+      <%= link_to "See More", event, class: "selectBtn" %>
+    </p>
+<% end %>-->
